@@ -1,2 +1,5 @@
 node_modules
 .idea
+outputs/magenta_music
+mag
+config/custom.json
