@@ -20,7 +20,7 @@ router.post('/generate.json', function (req, res, next) {
         `--config=${s.MAG_DIR}\\${req.body.config}`,
         `--bundle_file=${s.MAG_DIR}\\${req.body.bundle}.mag`,
         `--output_dir=outputs\\magenta_music\\${req.body.config}`,
-        `--num_output=40`,
+        `--num_outputs=40`,
         `--num_steps=32`,
         `--primer_melody="[${key}, ${key + tone_delta}]"`
     ];
