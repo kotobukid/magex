@@ -23,6 +23,14 @@
                                 option(value="loopback_rnn") loopback_rnn
                                 option(value="mono_rnn") mono_rnn
                     tr
+                        th Bars
+                        td
+                            select(v-model="bars")
+                                option(:value="32") 2
+                                option(:value="64") 4
+                                option(:value="128") 8
+                                option(:value="256") 16
+                    tr
                         td(colspan="2")
                             input(type="submit" value="generate" style="margin-left: 102px;" @click.prevent="generate")
 </template>
@@ -42,6 +50,7 @@ import axios, {AxiosResponse} from 'axios';
 export default class App extends Vue {
     config: string = 'basic_rnn';
     bundle: string = 'basic_rnn';
+    bars: number = 32;
     cells: Cell[] = [] // 16
 
     cells_changed(cells: Cell[]): void {
@@ -68,7 +77,8 @@ export default class App extends Vue {
         axios.post('/generate.json', {
             primer_melody,
             config: this.config,
-            bundle: this.bundle
+            bundle: this.bundle,
+            bars: this.bars
         }).then((res: AxiosResponse<{ success: boolean }>) => {
             console.log(res.data.success);
         })
