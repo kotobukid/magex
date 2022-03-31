@@ -32,7 +32,13 @@
                                 option(:value="256") 16
                     tr
                         td(colspan="2")
-                            input(type="submit" value="generate" style="margin-left: 102px;" @click.prevent="generate")
+                            input(
+                                type="submit"
+                                value="generate"
+                                style="margin-left: 102px;"
+                                @click.prevent="generate"
+                                :disabled="prevent_double_submit"
+                            )
 </template>
 
 <script lang="ts">
@@ -52,6 +58,7 @@ export default class App extends Vue {
     bundle: string = 'basic_rnn';
     bars: number = 32;
     cells: Cell[] = [] // 16
+    prevent_double_submit: boolean = false;
 
     cells_changed(cells: Cell[]): void {
         this.cells = cells;
@@ -73,6 +80,10 @@ export default class App extends Vue {
     }
 
     generate(): void {
+        if (this.prevent_double_submit) {
+            return;
+        }
+        this.prevent_double_submit = true;
         const primer_melody = this.dump_cells();
         axios.post('/generate.json', {
             primer_melody,
@@ -80,6 +91,7 @@ export default class App extends Vue {
             bundle: this.bundle,
             bars: this.bars
         }).then((res: AxiosResponse<{ success: boolean }>) => {
+            this.prevent_double_submit = false;
             console.log(res.data.success);
         })
     }
