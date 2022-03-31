@@ -15,14 +15,6 @@
                                 option(value="attention_rnn") attention_rnn
                                 option(value="loopback_rnn") loopback_rnn
                     tr
-                        th Bundle
-                        td
-                            select(v-model="bundle")
-                                option(value="basic_rnn") basic_rnn
-                                option(value="attention_rnn") attention_rnn
-                                option(value="loopback_rnn") loopback_rnn
-                                option(value="mono_rnn") mono_rnn
-                    tr
                         th Bars
                         td
                             select(v-model="bars")
@@ -55,7 +47,6 @@ import axios, {AxiosResponse} from 'axios';
 })
 export default class App extends Vue {
     config: string = 'basic_rnn';
-    bundle: string = 'basic_rnn';
     bars: number = 32;
     cells: Cell[] = [] // 16
     prevent_double_submit: boolean = false;
@@ -88,7 +79,6 @@ export default class App extends Vue {
         axios.post('/generate.json', {
             primer_melody,
             config: this.config,
-            bundle: this.bundle,
             bars: this.bars
         }).then((res: AxiosResponse<{ success: boolean }>) => {
             this.prevent_double_submit = false;

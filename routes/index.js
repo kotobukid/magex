@@ -17,7 +17,7 @@ router.post('/generate.json', function (req, res, next) {
 
     const options = [
         `--config=${s.MAG_DIR}\\${body.config}`,
-        `--bundle_file=${s.MAG_DIR}\\${body.bundle}.mag`,
+        `--bundle_file=${s.MAG_DIR}\\${body.config}.mag`,
         `--output_dir=outputs\\magenta_music\\${body.config}`,
         `--num_outputs=10`,
         `--num_steps=${body.bars}`,
@@ -30,6 +30,7 @@ router.post('/generate.json', function (req, res, next) {
 
     child_process.exec(`${path.join(req.settings.MAGENTA_PATH, 'melody_rnn_generate.exe')} ${options.join(' ')}`, (err, stdout, stderr) => {
         if (err) {
+            console.error(err);
             res.json({success: false});
             return;
         }
