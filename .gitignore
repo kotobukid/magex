@@ -3,3 +3,4 @@ node_modules
 outputs/magenta_music
 mag
 config/custom.json
+/public/javascripts/pages/index.js
