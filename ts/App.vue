@@ -13,7 +13,7 @@
                             select(v-model="config")
                                 option(value="basic_rnn") basic_rnn
                                 option(value="attention_rnn") attention_rnn
-                                option(value="loopback_rnn") loopback_rnn
+                                option(value="lookback_rnn") lookback_rnn
                     tr
                         th Bars
                         td
