@@ -1,0 +1,5 @@
+python 3.7.9
+
+requirements.txt
+    magenta==2.0.1
+    tensorflow==1.15
