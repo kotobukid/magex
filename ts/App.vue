@@ -16,6 +16,8 @@ import axios, {AxiosResponse} from 'axios';
 import MelodyGenerator from './components/melody_generator.vue';
 import ChordProgression from "./components/chord_progression.vue";
 
+declare type ApplicationType = 'melody_generator' | 'chord_progression';
+
 @Component({
     components: {
         'melody-generator': MelodyGenerator,
@@ -23,10 +25,10 @@ import ChordProgression from "./components/chord_progression.vue";
     },
 })
 export default class App extends Vue {
-    application = 'melody_generator';
+    application: ApplicationType = 'chord_progression';
 
     get is_content_active(): Function {
-        return (application: string): 'active' | '' => {
+        return (application: ApplicationType): 'active' | '' => {
             return application === this.application ? 'active' : '';
         }
     }
