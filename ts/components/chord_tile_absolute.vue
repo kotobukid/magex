@@ -1,8 +1,8 @@
 <template lang="pug">
-    .chord_tile(:data-role="bar.role" @click="tile_clicked")
+    .chord_tile(:data-role="bar.role")
         span.chord_name {{ chord_name }}
         br
-        span.scale_key {{ bar_computed.scale_key }}
+        span.scale_key {{ bar.scale_key }}
         //br
         //span.role {{ bar.role }}
 
@@ -15,7 +15,7 @@ import _ from 'lodash';
 import {chord_name} from "../music";
 
 @Component
-export default class ChordTile extends Vue {
+export default class ChordTileAbsolute extends Vue {
     @Prop({default: 60})
     private current_key!: number;
 
@@ -25,30 +25,30 @@ export default class ChordTile extends Vue {
                 bar_length: 1,
                 role: 'any',
                 invert: 0,
-                key_offset: 60
+                scale_key: 60
             }
         }
     })
-    private bar!: BarRelative;
+    private bar!: Bar;
 
-    tile_clicked(): void {
-        this.$emit('clicked', {
-            bar: this.bar_computed
-        });
-    }
+    // tile_clicked(): void {
+    //     this.$emit('clicked', {
+    //         bar: this.bar_computed
+    //     });
+    // }
 
     get chord_name(): string {
-        return chord_name(this.bar_computed);
+        return chord_name(this.bar);
     }
 
-    get bar_computed(): Bar {
-        return {
-            bar_length: this.bar.bar_length,
-            role: this.bar.role,
-            invert: this.bar.invert,
-            scale_key: this.current_key + this.bar.key_offset
-        };
-    }
+    // get bar_computed(): Bar {
+    //     return {
+    //         bar_length: this.bar.bar_length,
+    //         role: this.bar.role,
+    //         invert: this.bar.invert,
+    //         scale_key: this.current_key + this.bar.key_offset
+    //     };
+    // }
 }
 
 </script>
@@ -69,9 +69,9 @@ export default class ChordTile extends Vue {
         margin-bottom: 4px;
     }
 
-    &:nth-child(3) {
-        margin-right: 0;
-    }
+    //&:nth-child(3) {
+    //    margin-right: 0;
+    //}
 
     float: left;
 

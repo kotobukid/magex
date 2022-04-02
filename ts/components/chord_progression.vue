@@ -68,8 +68,8 @@ export default class ChordProgression extends Vue {
         },
     ];
 
-    append_bar(info: { scale_key: number }): void {
-        console.log(info);
+    append_bar(info: { bar: Bar }): void {
+        this.$store.commit('chord/append_tile', info);
     }
 
 }
