@@ -45,7 +45,7 @@ const NUM_NAME = {
 }
 
 @Component
-export default class HelloWorld extends Vue {
+export default class PianoRoll extends Vue {
     @Prop({
         default: []
     }) private cells!: Cell[];
