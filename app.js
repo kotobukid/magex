@@ -1,4 +1,12 @@
-const settings = require('./config/custom.json');
+const fs = require('fs');
+const config_file_path = './config/custom.json';
+
+if (!fs.existsSync(config_file_path)) {
+    console.error('config file not found.\n`cp ./config/default.json to ./config/custom.json`');
+    process.exit(1);
+}
+
+const settings = require(config_file_path);
 
 const createError = require('http-errors');
 const express = require('express');
