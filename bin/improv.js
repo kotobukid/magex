@@ -2,6 +2,10 @@ const s = require('../config/custom.json');
 const child_process = require('child_process');
 const path = require('path');
 
+const progression_komuro = ['Am F G C', 32];
+const progression_marusa = ['F E Am C F E Am C', 16];
+const progression_twinkle_star = ['C C G G F F C C', 16];
+
 const options = [
     '--config=chord_pitches_improv',
     `--bundle_file=${s.MAG_DIR}\\chord_pitches_improv.mag`,
@@ -10,9 +14,8 @@ const options = [
     `--temperature=0.8`,
     `--qpm=120`,
     `--primer_melody="[60]"`,
-    // `--primer_melody="[60, -2, 60, -2, 67, -2, 67, -2, 69, -2, 69, -2, 67, -2, -2, -2]"`,
-    `--backing_chords="C C G G F F C C"`,
-    `--steps_per_chord=16`,
+    `--backing_chords="${progression_marusa[0]}"`,
+    `--steps_per_chord=${progression_marusa[1]}`,
     `--render_chords=False`
 ];
 
@@ -24,9 +27,8 @@ const options2 = [
     `--temperature=1.0`,
     `--qpm=120`,
     `--primer_melody="[60]"`,
-    // `--primer_melody="[60, -2, 60, -2, 67, -2, 67, -2, 69, -2, 69, -2, 67, -2, -2, -2]"`,
-    `--backing_chords="C C G G F F C C"`,
-    `--steps_per_chord=16`,
+    `--backing_chords="${progression_marusa[0]}"`,
+    `--steps_per_chord=${progression_marusa[1]}`,
     `--render_chords=True`
 ];
 
